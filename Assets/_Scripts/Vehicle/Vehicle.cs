@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-    // A reference to the rigidbody component on the vehicle
     public Rigidbody rigidbody;
 
-    // The movement component for the vehicle
     public VehicleMovement movement;
-
     public Boost boost;
+    public JumpsAndFlips jumpsAndFlips;
 
-    // Update is called once per frame
     void Update()
     {
-        // Update the movement based on player input
+        // Update the movement, boost, and jumps and flips based on player input
         movement.FixedUpdate();
+        jumpsAndFlips.Update();
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             boost.Activate();
         }

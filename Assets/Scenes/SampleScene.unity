@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 935101371}
   - component: {fileID: 935101370}
   - component: {fileID: 935101369}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ MonoBehaviour:
   minDistance: -5
   maxDistance: -10
   minZ: 0
-  maxZ: 10
+  maxZ: 8
   movementSpeed: 10
 --- !u!1 &2002054321
 GameObject:
@@ -628,6 +628,7 @@ GameObject:
   - component: {fileID: 2002054324}
   - component: {fileID: 2002054323}
   - component: {fileID: 2002054326}
+  - component: {fileID: 2002054327}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -684,6 +685,7 @@ MonoBehaviour:
   rigidbody: {fileID: 214894361}
   movement: {fileID: 2002054323}
   boost: {fileID: 2002054326}
+  jumpsAndFlips: {fileID: 2002054327}
 --- !u!114 &2002054326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,3 +703,23 @@ MonoBehaviour:
   boostDuration: 2
   boostCooldown: 5
   isBoostActive: 0
+--- !u!114 &2002054327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002054321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7f7bfd05ef7194da6fbf08929aff24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 214894361}
+  jumpForce: 3
+  flipForce: 200
+  jumpCooldown: 3
+  flipCooldown: 5
+  currentJumpCooldown: 0
+  currentFlipCooldown: 0
+  targetObject: {fileID: 214894365}
