@@ -604,7 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 214894365}
-  smoothTime: 1
+  smoothTime: 0.5
   height: 2
   offset: 0
   minPitch: -30
@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 2002054322}
   - component: {fileID: 2002054324}
   - component: {fileID: 2002054323}
-  - component: {fileID: 2002054325}
+  - component: {fileID: 2002054326}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -668,6 +668,7 @@ MonoBehaviour:
   brakeForce: 5
   maxSpeed: 8
   rotationSpeed: 1
+  boost: {fileID: 2002054326}
 --- !u!114 &2002054324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,23 +683,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 214894361}
   movement: {fileID: 2002054323}
---- !u!114 &2002054325
+  boost: {fileID: 2002054326}
+--- !u!114 &2002054326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002054321}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e0cd39f89a43740a41ac4c701b217d, type: 3}
+  m_Script: {fileID: 11500000, guid: cde99b3aab71a0a4cab849a71faaa1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 963194228}
-  targetTransform: {fileID: 214894365}
-  distance: 10
-  height: 3
-  smoothness: 0.05
-  movementSpeed: 500
-  minRotationX: -30
-  maxRotationX: 30
+  rb: {fileID: 214894361}
+  boostAcceleration: 10
+  boostDuration: 2
+  boostCooldown: 5
+  isBoostActive: 0

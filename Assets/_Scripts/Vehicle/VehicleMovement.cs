@@ -14,12 +14,14 @@ public class VehicleMovement : MonoBehaviour
 
     public float rotationSpeed;
 
+    public Boost boost;
+
     public VehicleMovement(Rigidbody rb)
     {
         this.rb = rb;
     }
 
-    public void UpdateMovement()
+    public void FixedUpdate()
     {
         if (rb == null)
         {
@@ -38,7 +40,18 @@ public class VehicleMovement : MonoBehaviour
             force = -facingDirection * brakeForce;
         }
         rb.AddRelativeForce(force);
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+
+        // Check if the boost is active
+        if (!boost.isBoostActive)
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+
+        }
+        else
+        {
+            return;
+        }
+
     }
 
 }

@@ -10,10 +10,17 @@ public class Vehicle : MonoBehaviour
     // The movement component for the vehicle
     public VehicleMovement movement;
 
+    public Boost boost;
+
     // Update is called once per frame
     void Update()
     {
         // Update the movement based on player input
-        movement.UpdateMovement();
+        movement.FixedUpdate();
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            boost.Activate();
+        }
     }
 }
