@@ -20,6 +20,14 @@ public class SingleTargetCamera : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = target.GetComponent<Rigidbody>();
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+    }
+
     void Update()
     {
         // Calculate the desired position and rotation for the camera

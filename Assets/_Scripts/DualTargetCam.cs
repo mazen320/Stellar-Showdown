@@ -21,6 +21,14 @@ public class DualTargetCam : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = target.GetComponent<Rigidbody>();
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+    }
+
     void Update()
     {
         // Calculate the direction from the primary target to the secondary target
