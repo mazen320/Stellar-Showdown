@@ -19,6 +19,9 @@ public class DualTargetCam : MonoBehaviour
     public float maxZ = 0.0f;
     public float movementSpeed = 3f;
 
+    public float minHeight;
+    public float maxHeight;
+
     private Vector3 velocity = Vector3.zero;
 
     private Rigidbody rb;
@@ -36,6 +39,20 @@ public class DualTargetCam : MonoBehaviour
 
         // Calculate the desired position and rotation for the camera
         Vector3 desiredPosition = target.position + (direction.normalized * minDistance) + (target.up * height);
+
+        // If the secondary target is below the primary target, adjust the height value to point at the secondary target
+        if (secondaryTarget.position.y < target.position.y)
+        {
+            height = Mathf.Max(secondaryTarget.position.y - target.position.y, minHeight);
+            desiredPosition = target.position + (direction.normalized * minDistance) + (target.up * height);
+        }
+        // Otherwise, clamp the height value to the desired range
+        else
+        {
+            height = Mathf.Clamp(height, minHeight, maxHeight);
+            desiredPosition = target.position + (direction.normalized * minDistance) + (target.up * height);
+        }
+
         Quaternion desiredRotation = Quaternion.LookRotation(direction, Vector3.up);
 
         // Clamp the distance, pitch, and roll values to the desired ranges
@@ -63,35 +80,12 @@ public class DualTargetCam : MonoBehaviour
                 desiredYaw += 360.0f;
             }
         }
-
         // Update the yaw angle of the desired rotation
-        desiredRotation.eulerAngles = new Vector3(desiredRotation.eulerAngles.x, desiredYaw, desiredRotation.eulerAngles.z);
+            desiredRotation.eulerAngles = new Vector3(desiredRotation.eulerAngles.x, desiredYaw, desiredRotation.eulerAngles.z);
 
         // Update the position and rotation of the camera based on the desired values
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, smoothTime);
-    }
-
-
-
-
-
-    Vector3 ClampPosition(Vector3 position, float minDistance, float maxDistance)
-    {
-        // Calculate the distance between the camera and the primary target
-        float distance = Vector3.Distance(position, target.position);
-
-        // If the distance is outside the desired range, adjust the position of the camera
-        if (distance < minDistance)
-        {
-            position = target.position + (position - target.position).normalized * minDistance;
-        }
-        else if (distance > maxDistance)
-        {
-            position = target.position + (position - target.position).normalized * maxDistance;
-        }
-
-        return position;
     }
 
     Quaternion ClampRotationAroundZAxis(Quaternion q, float minAngle, float maxAngle)
